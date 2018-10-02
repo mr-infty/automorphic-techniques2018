@@ -1,13 +1,22 @@
 \documentclass[pdf]{beamer}
 \mode<presentation>{}
+%\usetheme{Rochester}
+\usecolortheme{orchid}
+%\usecolortheme{seahorse}
 
 \usepackage[sans]{dsfont}
 \usepackage{amsmath}
 \usepackage{csquotes}
+\usepackage[all,cmtip]{xy}
 
 \newcommand{\op}[1]{\operatorname{#1}}
 \newcommand{\bbf}[1]{\mathds{#1}}
 \newcommand{\Z}{\bbf{Z}}
+\newcommand{\F}{\bbf{F}}
+\newcommand{\C}{\bbf{C}}
+\newcommand{\X}{\bbf{X}}
+
+\newtheorem{question}{Question}
 
 \title{The Cohomology of Root Data}
 \author{Nicolas A. Schmidt}
@@ -25,12 +34,51 @@
    According to \textit{Kurt Eissler}:
   \pause
    \blockquote[]{
-      \textins{\textit{Automorphic techniques} are} artistic activites which take place in a borderland of autoplastic and alloplastic attitudes toward reality. A work of art \textelp{} is \textit{autoplastic} in so far as, like a dream or symptom, it serves the {\color<4->[rgb]{1,0,0}solution of an inner conflict and the fulfillment of a wish}; it is simultaneously \textit{alloplastic}, however, since it modifies reality by the {\color<4->[rgb]{1,0,0}creation of something original and new}.
+      \textins{\textit{Automorphic techniques} are} artistic activites which take place in a borderland of autoplastic and alloplastic attitudes toward reality.\uncover<4->{ A work of art \textelp{} is \textit{autoplastic} in so far as, like a dream or symptom, it serves the {\color<6->[rgb]{1,0,0}solution of an inner conflict} and the {\color<6->[rgb]{1,0,0}fulfillment of a wish};\uncover<5->{ it is simultaneously \textit{alloplastic}, however, since it modifies reality by the {\color<6->[rgb]{1,0,0}creation of something original and new.}}}
    }
    (Taken from H. Kohut, \textit{Forms and Transformations of Narcicissm.} American Imago, 1967)
 \end{frame}
 
 \begin{frame}{The problem}
+   \pause{}Given
+   \begin{itemize}
+      \item $G$ - split reductive group $G$ over field $k$\pause
+      \item $T$ - maximal split torus in $G$
+   \end{itemize}
+   \pause have extension
+   \[ \xymatrix{ 1 \ar[r] & T(k) \ar[r] & N(k) \ar[r] & W \ar[r] & 1 } \]
+   \pause where
+   \begin{itemize}
+      \item $N$ - normalizer of $T$\pause
+      \item $W$ - Weyl group\pause{}, subgroup of $\op{Aut}(T) = \op{GL}_{\Z}(X_\ast(T))$
+   \end{itemize}\pause
+   \begin{question}
+      When does this extension split?
+   \end{question}
+\end{frame}
+
+\begin{frame}{Brief history of the problem}
+   \begin{itemize}
+      \item[1966] Tits' article ``Normalisateurs de Tores I.'' appears. \pause Announces complete solution in ``Normalisateurs de Tores II.''\pause , which \textit{never appeared}.\pause 
+      \item<-7>[1974] Curtis, Wiederhold, and Williams give answer for \textit{simple} groups over $k = \C$.\pause
+      \item<-7>[2013--17] Gal't solves it case-by-case for $k = \overline{\F}_p$ in several articles.\pause
+      \item<-7>[2017] Question is settled in general by Adams and He.\pause
+      \item[2018] I attempt myself at it.\pause
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{My story}
+   \pause For every Coxeter group $(W,S)$, there exists a canonical $2$-cocycle\pause
+   \[ \X: W \times W \longrightarrow \Z[\mathfrak{H}] \]
+   \pause given by
+   \[ \X(w,w') = \prod_{ H \in \mathfrak{H}(w,w')} a_H \]
+   \pause where
+   \begin{align*} \Z[\mathfrak{H}] & = \text{free (multiplicative) abelian group on symbols $a_H$} \\
+      \uncover<6->{\mathfrak{H} & = \{ wsw^{-1} : w \in W,\ s \in S\} \pause \uncover<7->{= \text{``hyperplanes''}} \\}
+      \uncover<8->{\mathfrak{H}(w,w') & = \{ H \in \mathfrak{H} : \text{$H$ separates both $1$ from $w$ and $w$ from $ww'$}\}\\}
+      \uncover<9->{ & = \text{hyperplanes crossed twice by $1-w-ww'$}\\}
+      \uncover<10->{ & = \text{\textbf{the thing that makes your life difficult}}}
+   \end{align*}
 \end{frame}
 
 \end{document}
