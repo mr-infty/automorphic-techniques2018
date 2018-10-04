@@ -3,6 +3,7 @@
 %\usetheme{Rochester}
 \usecolortheme{orchid}
 %\usecolortheme{seahorse}
+\setbeamertemplate{theorems}[ams style]
 
 \usepackage[sans]{dsfont}
 \usepackage{amsmath}
@@ -17,6 +18,9 @@
 \newcommand{\X}{\bbf{X}}
 
 \newtheorem{question}{Question}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{cor*}{Corollary}
 
 \title{The Cohomology of Root Data}
 \author{Nicolas A. Schmidt}
@@ -58,16 +62,16 @@
 \end{frame}
 
 \begin{frame}{Brief history of the problem}
-   \begin{itemize}
+   \pause\begin{itemize}
       \item[1966] Tits' article ``Normalisateurs de Tores I.'' appears. \pause Announces complete solution in ``Normalisateurs de Tores II.''\pause , which \textit{never appeared}.\pause 
-      \item<-7>[1974] Curtis, Wiederhold, and Williams give answer for \textit{simple} groups over $k = \C$.\pause
-      \item<-7>[2013--17] Gal't solves it case-by-case for $k = \overline{\F}_p$ in several articles.\pause
-      \item<-7>[2017] Question is settled in general by Adams and He.\pause
+      \item<-8>[1974] Curtis, Wiederhold, and Williams give answer for \textit{simple} groups over $k = \C$.\pause
+      \item<-8>[2013--17] Gal't solves it case-by-case for $k = \overline{\F}_p$ in several articles.\pause
+      \item<-8>[2017] Question is settled in general by Adams and He.\pause
       \item[2018] I attempt myself at it.\pause
    \end{itemize}
 \end{frame}
 
-\begin{frame}{My story}
+\begin{frame}{\dots and how I came to it}
    \pause For every Coxeter group $(W,S)$, there exists a canonical $2$-cocycle\pause
    \[ \X: W \times W \longrightarrow \Z[\mathfrak{H}] \]
    \pause given by
@@ -75,10 +79,90 @@
    \pause where
    \begin{align*} \Z[\mathfrak{H}] & = \text{free (multiplicative) abelian group on symbols $a_H$} \\
       \uncover<6->{\mathfrak{H} & = \{ wsw^{-1} : w \in W,\ s \in S\} \pause \uncover<7->{= \text{``hyperplanes''}} \\}
-      \uncover<8->{\mathfrak{H}(w,w') & = \{ H \in \mathfrak{H} : \text{$H$ separates both $1$ from $w$ and $w$ from $ww'$}\}\\}
-      \uncover<9->{ & = \text{hyperplanes crossed twice by $1-w-ww'$}\\}
-      \uncover<10->{ & = \text{\textbf{the thing that makes your life difficult}}}
+      \uncover<8->{\mathfrak{H}(w,w') & = \{ H \in \mathfrak{H} : \text{\uncover<9->{$H$ separates both $1$ from $w$ and $w$ from $ww'$}}\}\\}
+      \uncover<10->{ & = \text{hyperplanes crossed twice by $1-w-ww'$}\\}
+      \uncover<11->{ & = \text{\textbf{the thing that makes your life difficult}}}
    \end{align*}
+\end{frame}
+
+\begin{frame}{\dots and how I came to it}
+   \pause Given $(W,S)$, consider category $\mathcal{C}(W,S)$ with\pause
+\begin{itemize}
+   \item[objs] Extensions \uncover<4->{together with set-theoretic sections $n$}
+      \[ \xymatrix{ 1 \ar[r] & T \ar[r] & W(1) \ar[r] & W \ar[r] \alt<4->{\ar@/_1.5em/[l]_n}{\ar@[white]@/_1.5em/[l]_{\color{white}n}} & 1 } \]
+   \pause[5]satisfying the ``braid relations''
+   \[ \ell(ww') = \ell(w)+\ell(w') \quad \Rightarrow \quad n(ww') = n(w)n(w') \]
+\item<6->[morphs] Commutative diagrams\uncover<7->{ preserving sections \uncover<8->{($\phi \circ n = n'$)}}
+      \[ \xymatrix{ 1 \ar[r] & T \ar[d] \ar[r] & W(1) \ar[d]^\phi \ar[r] & W \ar[d]^{\op{id}} \ar[r] & 1 \\
+   1 \ar[r] & T' \ar[r] & W(1)' \ar[r] & W \ar[r] & 1 } \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\dots and how I came to it}
+   \pause
+   \begin{theorem*}[\alt<7->{Tits}{S.}]\label{thm:tits}
+   The category $\mathcal{C}(W,S)$ has an initial object $V$ given by
+   \[ \xymatrix{ 1 \ar[r] & \Z[\mathfrak{H}] \ar[r] & V \ar[r] & W \ar[r] & 1 } \]
+   \pause where $V = \Z[\mathfrak{H}]\times W$ with product
+   \[ (t,w)\cdot{}(t',w') = (tw(t')\X(w,w'), ww') \]
+   \pause Given $W(1)$ in $\mathcal{C}(W,S)$, the induced morphism $\phi: V \rightarrow W(1)$ is determined by
+   \[ \pause\phi(t,w) = \phi(t)\cdot n(w) \quad \pause\text{and}\quad \phi(a_s) = n(s)^2 \]
+   \end{theorem*}
+\end{frame}
+
+\begin{frame}{Schreier theory}
+   \pause For every abelian $W$-module $T$\pause
+   \[ H^2(W,T) \simeq \{ \xymatrix{ 1 \ar[r] & T \ar[r] & G \ar[r] & W \ar[r] & 1  } \}/_\sim \]
+   \pause where to an extension \uncover<5->{(and a set-theoretic section $n$)}
+   \begin{equation}\label{eq:seq1} \xymatrix{ 1 \ar[r] & T \ar[r] & G \ar[r] & W \ar[r] \alt<5->{\ar@/_1.2em/[l]^n}{\ar@[white]@/_1.2em/[l]^{\color{white}n}} & 1 } \tag{$\ast$} \end{equation}
+   \pause[6] one associates the $2$-cocycle
+   \[ \phi(g,g') = n(g)n(g')n(gg')^{-1} \]
+   \pause In particular
+   \[ \text{\eqref{eq:seq1} splits} \quad \Leftrightarrow\quad [\phi] = 0 \]
+\end{frame}
+
+\begin{frame}
+   \begin{cor*}[of Tits' thm]
+      Given an object
+      \[ \xymatrix{ 1 \ar[r] & T \ar[r] & W(1) \ar[r] & W \ar[r] \ar@/_1.2em/[l]^n & 1 } \]
+      of $\mathcal{C}(W,S)$\pause , the underlying extension of $T$ by $W$ is classified by
+      \[ [h\circ \X] = h_\ast [\X] \]
+   \end{cor*}
+\end{frame}
+
+\begin{frame}{$N(k)$ as an object of $\mathcal{C}(W,S)$}
+   \pause\begin{itemize}
+      \item<2-> $\Phi$ - root system of $(G,T)$
+      \item<3-> $U_\alpha \leq G$ - root subgroup \pause ($\alpha \in \Phi$)
+   \end{itemize}
+   \pause Choose
+   \begin{itemize}
+      \item<5-> $\Delta \subseteq \Phi$ - simple roots
+      \item<6-> $u_\alpha \in U_\alpha(k)-\{1\}$ for $\alpha \in \Delta$
+   \end{itemize}
+   \pause[7] Put
+   \begin{itemize}
+      \item<8-> $S := \{ s_\alpha : \alpha \in \Delta \}$ \uncover<9->{$\Rightarrow$ $(W,S)$ is Coxeter group}
+      \item<10-> $\{n_\alpha\} := U_{-\alpha}(k)u_\alpha U_{-\alpha}(k)\ \cap\ N(k)$
+   \end{itemize}
+
+   \pause[11]
+   \begin{lemma*}
+      For all $\alpha, \beta \in \Delta$
+      \[ \underbrace{n_\alpha n_\beta n_\alpha \dots}_{m(s_\alpha,s_\beta)} = \underbrace{n_\beta n_\alpha n_\beta \dots}_{m(s_\alpha, s_\beta)} \]
+      \pause[12] (where $m(s,t) := \op{ord}(st)$)
+   \end{lemma*}
+\end{frame}
+
+\begin{frame}{$N(k)$ as an object of $\mathcal{C}(W,S)$}
+   \begin{cor*}
+      There exists a unique map of sets $n: W \rightarrow N(k)$ s.t.
+      \begin{align*} n(ww') & = n(w)n(w') \text{ if } \ell(ww') = \ell(w)+\ell(w') \\
+         n(s_\alpha) & = n_\alpha \text{ if } \alpha \in \Delta
+\end{align*}
+   \end{cor*}
+   \pause By Tits' theorem, extension \eqref{the-seq} gives
+   \[ h: \Z[\mathfrak{H}] \longrightarrow T(k) \]
 \end{frame}
 
 \end{document}
