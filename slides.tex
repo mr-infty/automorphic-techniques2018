@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{csquotes}
 \usepackage[all,cmtip]{xy}
+\usepackage{eqparbox}
 
 \newcommand{\op}[1]{\operatorname{#1}}
 \newcommand{\bbf}[1]{\mathds{#1}}
@@ -46,7 +47,7 @@
 \begin{frame}{The problem}
    \pause{}Given
    \begin{itemize}
-      \item $G$ - split reductive group $G$ over field $k$\pause
+      \item $G$ - connected split \alt<9->{almost-simple s.s.}{reductive} group $G$ over field $k$\pause
       \item $T$ - maximal split torus in $G$
    \end{itemize}
    \pause have extension
@@ -54,10 +55,10 @@
    \pause where
    \begin{itemize}
       \item $N$ - normalizer of $T$\pause
-      \item $W$ - Weyl group\pause{}, subgroup of $\op{Aut}(T) = \op{GL}_{\Z}(X_\ast(T))$
+      \item $W$ - Weyl group of $\Phi(G,T)$\pause{}, subgroup of $\op{Aut}(T) = \op{GL}_{\Z}(X_\ast(T))$
    \end{itemize}\pause
-   \begin{question}
-      When does this extension split?
+   \begin{question}\label{q:one}
+   For which $G$ does this extension split?
    \end{question}
 \end{frame}
 
@@ -89,11 +90,11 @@
    \pause Given $(W,S)$, consider category $\mathcal{C}(W,S)$ with\pause
 \begin{itemize}
    \item[objs] Extensions \uncover<4->{together with set-theoretic sections $n$}
-      \[ \xymatrix{ 1 \ar[r] & T \ar[r] & W(1) \ar[r] & W \ar[r] \alt<4->{\ar@/_1.5em/[l]_n}{\ar@[white]@/_1.5em/[l]_{\color{white}n}} & 1 } \]
-   \pause[5]satisfying the ``braid relations''
+      \[ \xymatrix{ 1 \ar[r] & T \ar[r] & W(1) \ar[r] & W \ar[r] \alt<4->{\ar@/_1.2em/[l]^n}{\ar@[white]@/_1.2em/[l]^{\color{white}n}} & 1 } \]
+   \pause[5]satisfying the ``braid relation''
    \[ \ell(ww') = \ell(w)+\ell(w') \quad \Rightarrow \quad n(ww') = n(w)n(w') \]
-\item<6->[morphs] Commutative diagrams\uncover<7->{ preserving sections \uncover<8->{($\phi \circ n = n'$)}}
-      \[ \xymatrix{ 1 \ar[r] & T \ar[d] \ar[r] & W(1) \ar[d]^\phi \ar[r] & W \ar[d]^{\op{id}} \ar[r] & 1 \\
+\item<6->[morphs] Commutative diagrams\uncover<7->{ preserving sections \uncover<8->{($h \circ n = n'$)}}
+      \[ \xymatrix{ 1 \ar[r] & T \ar[d] \ar[r] & W(1) \ar[d]^h \ar[r] & W \ar[d]^{\op{id}} \ar[r] & 1 \\
    1 \ar[r] & T' \ar[r] & W(1)' \ar[r] & W \ar[r] & 1 } \]
 \end{itemize}
 \end{frame}
@@ -105,8 +106,8 @@
    \[ \xymatrix{ 1 \ar[r] & \Z[\mathfrak{H}] \ar[r] & V \ar[r] & W \ar[r] & 1 } \]
    \pause where $V = \Z[\mathfrak{H}]\times W$ with product
    \[ (t,w)\cdot{}(t',w') = (tw(t')\X(w,w'), ww') \]
-   \pause Given $W(1)$ in $\mathcal{C}(W,S)$, the induced morphism $\phi: V \rightarrow W(1)$ is determined by
-   \[ \pause\phi(t,w) = \phi(t)\cdot n(w) \quad \pause\text{and}\quad \phi(a_s) = n(s)^2 \]
+   \pause Given $W(1)$ in $\mathcal{C}(W,S)$, the induced morphism $h: V \rightarrow W(1)$ is determined by
+   \[ \pause h(t,w) = h(t)\cdot n(w) \quad \pause\text{and}\quad h(a_s) = n(s)^2 \]
    \end{theorem*}
 \end{frame}
 
@@ -121,17 +122,20 @@
    \[ \text{\eqref{eq:seq1} splits} \quad \Leftrightarrow\quad [\phi] = 0 \]
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Schreier theory}
    \begin{cor*}[of Tits' thm]
       Given an object
       \[ \xymatrix{ 1 \ar[r] & T \ar[r] & W(1) \ar[r] & W \ar[r] \ar@/_1.2em/[l]^n & 1 } \]
-      of $\mathcal{C}(W,S)$\pause , the underlying extension of $T$ by $W$ is classified by
+      of $\mathcal{C}(W,S)$\pause , the underlying extension of $T$ by $W$ is classified by\pause
       \[ [h\circ \X] = h_\ast [\X] \]
+      \pause where $h: \Z[\mathfrak{H}] \rightarrow T$ denotes the induced map\pause , determined by
+      \[ h(a_s) = n(s)^2 \]
    \end{cor*}
 \end{frame}
 
 \begin{frame}{$N(k)$ as an object of $\mathcal{C}(W,S)$}
-   \pause\begin{itemize}
+   \pause Let
+   \begin{itemize}
       \item<2-> $\Phi$ - root system of $(G,T)$
       \item<3-> $U_\alpha \leq G$ - root subgroup \pause ($\alpha \in \Phi$)
    \end{itemize}
@@ -145,24 +149,71 @@
       \item<8-> $S := \{ s_\alpha : \alpha \in \Delta \}$ \uncover<9->{$\Rightarrow$ $(W,S)$ is Coxeter group}
       \item<10-> $\{n_\alpha\} := U_{-\alpha}(k)u_\alpha U_{-\alpha}(k)\ \cap\ N(k)$
    \end{itemize}
-
-   \pause[11]
-   \begin{lemma*}
-      For all $\alpha, \beta \in \Delta$
-      \[ \underbrace{n_\alpha n_\beta n_\alpha \dots}_{m(s_\alpha,s_\beta)} = \underbrace{n_\beta n_\alpha n_\beta \dots}_{m(s_\alpha, s_\beta)} \]
-      \pause[12] (where $m(s,t) := \op{ord}(st)$)
-   \end{lemma*}
 \end{frame}
 
 \begin{frame}{$N(k)$ as an object of $\mathcal{C}(W,S)$}
+   \begin{lemma*}
+      For all $\alpha, \beta \in \Delta$
+      \[ \underbrace{n_\alpha n_\beta n_\alpha \dots}_{m(s_\alpha,s_\beta)} = \underbrace{n_\beta n_\alpha n_\beta \dots}_{m(s_\alpha, s_\beta)} \]
+      \pause[2] (where $m(s,t) := \op{ord}(st)$)
+   \end{lemma*}
+   \pause[3]
    \begin{cor*}
       There exists a unique map of sets $n: W \rightarrow N(k)$ s.t.
       \begin{align*} n(ww') & = n(w)n(w') \text{ if } \ell(ww') = \ell(w)+\ell(w') \\
          n(s_\alpha) & = n_\alpha \text{ if } \alpha \in \Delta
 \end{align*}
    \end{cor*}
-   \pause By Tits' theorem, extension \eqref{the-seq} gives
-   \[ h: \Z[\mathfrak{H}] \longrightarrow T(k) \]
 \end{frame}
 
+\begin{frame}{Cohomological Reformulation of the Problem}
+\begin{cor*}
+   As an extension of $T(k)$ by $W$, $N(k)$ is classified by
+   \[ h_\ast[\X] \in H^2(W,T(k)) \]
+   \pause where $h:\Z[\mathfrak{H}] \rightarrow T(k)$ is determined by
+   \[ h(a_{s_\alpha}) = n_\alpha^2 \quad (\alpha \in \Delta) \]
+\end{cor*}
+\pause In particular, question \ref{q:one} is equivalent to\pause
+\begin{question}\label{q:two}
+   When does
+   \[ h_\ast[\X] = 0\]
+   hold true?
+\end{question}
+\end{frame}
+
+\begin{frame}{Getting rid of $G$}
+   \pause \begin{itemize}
+      \item<2-> $(X,\Phi,X^\vee,\Phi^\vee) := (X^\ast(T),\Phi,X_\ast(T),\Phi^\vee)$ - root datum
+      \item<3-> $T(k) \simeq \op{Hom}_\Z(X,k^\times) \uncover<4->{\simeq X^\vee \otimes k^\times}$
+   \end{itemize}
+   \pause[5]
+   \begin{lemma*}
+      For all $\alpha \in \Delta$\uncover<6->{ (note $\alpha^\vee \in X_\ast(T)$ is a map $\bbf{G}_m \rightarrow T$)}
+      \[ n_\alpha^2 = \alpha^\vee(k)(-1)\enskip \in\enskip T(k) \]
+      \pause[7] i.e.
+      \[ n_\alpha^2 = \alpha^\vee \otimes \only<8->{\eqmakebox[tauBOX][r]{$\tau^{-1}$}}\only<-7>{\eqmakebox[tauBOX][r]{$-1$}}\enskip \in\enskip \ X^\vee \otimes k^\times \]
+   \end{lemma*}
+   \pause[9] So $h:\Z[\mathfrak{H}] \rightarrow T(k) \uncover<10->{= X^\vee \otimes k^\times}$ \pause[11]is determined by\pause
+   \[ h(a_{s_\alpha}) = \alpha^\vee \otimes \tau^{-1} \]
+\end{frame}
+
+\begin{frame}{Getting rid of $G$}
+   \pause \begin{itemize}
+      \item<2-> $\Phi \subseteq V$ - simple root system
+      \item<3-> $Q^\vee = \Z\left<\Phi^\vee\right> \leq V^\vee$ - coroot lattice
+      \item<4-> $P^\vee = \{ \lambda \in V^\vee : \lambda(\Phi) \subseteq \Z \} \leq V^\vee$ - coweight lattice 
+      \item<5-> $Q^\vee \subseteq X^\vee \subseteq P^\vee$ - sublattice\uncover<6->{ (automatically $W$-invariant)}
+      \item<7-> $\Rightarrow (X,\Phi,X^\vee,\Phi^\vee)$ is the root datum of a connected split almost-simple s.s. group, and every such root datum is obtained in this way.
+   \end{itemize}
+   \pause[8] Thus question \ref{q:two} is equivalent to\pause
+   \begin{question}\label{q:three}
+      For which $\Phi$, $X^\vee$ \only<-9>{\eqmakebox[kBOX][l]{and $k$}}\only<10->{\eqmakebox[kBOX][l]{\textbf{and $\mathbf{k}$}}} does\uncover<11->{ (with $h(a_{s_\alpha}) = \alpha^\vee \otimes \tau^{-1}$)}
+      \[ h_\ast[\X] = 0 \]
+      hold true in $H^2(W,X^\vee\otimes k^\times)$?
+   \end{question}
+\end{frame}
+
+\begin{frame}{Getting rid of $k$}
+
+\end{frame}
 \end{document}
