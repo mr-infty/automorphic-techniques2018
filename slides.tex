@@ -5,11 +5,19 @@
 %\usecolortheme{seahorse}
 \setbeamertemplate{theorems}[ams style]
 
+\usepackage[utf8]{inputenc}
+
 \usepackage[sans]{dsfont}
 \usepackage{amsmath}
 \usepackage{csquotes}
 \usepackage[all,cmtip]{xy}
 \usepackage{eqparbox}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{bm}
+\usepackage{soul}
 
 \newcommand{\op}[1]{\operatorname{#1}}
 \newcommand{\bbf}[1]{\mathds{#1}}
@@ -22,6 +30,9 @@
 \newtheorem*{theorem*}{Theorem}
 \newtheorem*{lemma*}{Lemma}
 \newtheorem*{cor*}{Corollary}
+\newtheorem*{def*}{Definition}
+\newtheorem*{NB*}{N.B}
+\newtheorem*{problem*}{Problem}
 
 \title{The Cohomology of Root Data}
 \author{Nicolas A. Schmidt}
@@ -41,7 +52,7 @@
    \blockquote[]{
       \textins{\textit{Automorphic techniques} are} artistic activites which take place in a borderland of autoplastic and alloplastic attitudes toward reality.\uncover<4->{ A work of art \textelp{} is \textit{autoplastic} in so far as, like a dream or symptom, it serves the {\color<6->[rgb]{1,0,0}solution of an inner conflict} and the {\color<6->[rgb]{1,0,0}fulfillment of a wish};\uncover<5->{ it is simultaneously \textit{alloplastic}, however, since it modifies reality by the {\color<6->[rgb]{1,0,0}creation of something original and new.}}}
    }
-   (Taken from H. Kohut, \textit{Forms and Transformations of Narcicissm.} American Imago, 1967)
+   (Taken from H. Kohut, \textit{Forms and Transformations of Narcissism.} American Imago, 1967)
 \end{frame}
 
 \begin{frame}{The problem}
@@ -199,7 +210,7 @@
 
 \begin{frame}{Getting rid of $G$}
    \pause \begin{itemize}
-      \item<2-> $\Phi \subseteq V$ - simple root system
+      \item<2-> $\Phi \subseteq V$ - reduced irreducible root system
       \item<3-> $Q^\vee = \Z\left<\Phi^\vee\right> \leq V^\vee$ - coroot lattice
       \item<4-> $P^\vee = \{ \lambda \in V^\vee : \lambda(\Phi) \subseteq \Z \} \leq V^\vee$ - coweight lattice 
       \item<5-> $Q^\vee \subseteq X^\vee \subseteq P^\vee$ - sublattice\uncover<6->{ (automatically $W$-invariant)}
@@ -214,6 +225,136 @@
 \end{frame}
 
 \begin{frame}{Getting rid of $k$}
-
+   \begin{lemma*}
+      There exists a (unique) $W$-equivariant $\Z$-linear map
+      \[ h_u: \Z[\mathfrak{H}] \longrightarrow X^\vee \otimes \F_2 \]
+      satisfying
+      \[ h_u(a_{s_\alpha}) = \alpha^\vee \otimes 1\quad \forall \alpha \in \Phi \]
+      \pause Moreover, $h$ factors as
+      \[ \Z[\mathfrak{H}] \stackrel{h_u}{\longrightarrow} X^\vee \otimes \F_2 \stackrel{\op{id}\otimes \eta_k}{\longrightarrow} X^\vee \otimes k^\times \]
+      \pause where $\eta_k: \F_2 \twoheadrightarrow \mu_2(k) \subseteq k^\times$ is the obvious map \pause ($\eta_k(1) = \tau^{-1}$).
+   \end{lemma*}
 \end{frame}
+
+\begin{frame}{Getting rid of $k$}
+   \begin{def*}
+      \begin{center}$\phi_u := h_u \circ \X \pause\enskip \in \enskip Z^2(W,X^\vee \otimes \F_2)$\end{center}
+   \end{def*}
+   \pause \begin{cor*}
+      \begin{center}$h_\ast[\X] = (\op{id}\otimes \eta_k)_\ast [\phi_u]$\end{center}
+   \end{cor*}
+   \pause Thus, question \ref{q:three} is equivalent to \pause
+   \begin{question}\label{q:four}
+      For which $\Phi$, $X^\vee$ and $k$ does $[\phi_u]$ lie in the kernel of 
+      \[ H^2(W,X^\vee \otimes \F_2) \stackrel{(\op{id}\otimes \eta_k)_\ast}{\longrightarrow} H^2(W,X^\vee\otimes k^\times) \]
+      ?
+   \end{question}
+\end{frame}
+
+\begin{frame}{Getting rid of $k$ completely}
+   \pause \begin{NB*} If $-1 = 1$ in $k$, then $\phi_u = 0$. \pause So assume $-1 \neq 1$ from now on.
+   \end{NB*}
+   \pause Künneth's theorem applied to $\eta_k: \F_2 \hookrightarrow k^\times$ gives%
+   \uncover<5->{\only<-5>{\[ \xymatrix{ H^2(W,X^\vee)\otimes \F_2 \ar[d]^{\op{id}\otimes \eta_k} \ar@^{(->}[r]^{\color{white}\iota} & H^2(W,X^\vee \otimes \F_2) \ar@{->>}[r] \ar[d]^{(\op{id}\otimes \eta_k)_\ast} & \op{Tor}^{\Z}_1(H^3(W,X^\vee),\F_2) \ar[d] \\
+   H^2(W,X^\vee)\otimes k^\times \ar@^{(->}[r] & H^2(W,X^\vee \otimes k^\times) \ar@{->>}[r] & \op{Tor}^{\Z}_1(H^3(W,X^\vee),k^\times) } \]}%
+   \only<6>{\[ \xymatrix{ H^2(W,X^\vee)\otimes \F_2 \ar[d]^{\op{id}\otimes \eta_k} \ar@^{(->}[r]^{\color{white}\iota} & H^2(W,X^\vee \otimes \F_2) \ar@{->>}[r] \ar[d]^{(\op{id}\otimes \eta_k)_\ast} & \op{Tor}^{\Z}_1(H^3(W,X^\vee),\F_2) \ar@^{(->}[d] \\
+   H^2(W,X^\vee)\otimes k^\times \ar@^{(->}[r] & H^2(W,X^\vee \otimes k^\times) \ar@{->>}[r] & \op{Tor}^{\Z}_1(H^3(W,X^\vee),k^\times) } \]}%
+   \only<7->{\[ \xymatrix{ H^2(W,X^\vee)\otimes \F_2 \ar[d]^{\op{id}\otimes \eta_k} \ar@^{(->}[r]^{\iota} & H^2(W,X^\vee \otimes \F_2) \ar@{->>}[r] \ar[d]^{(\op{id}\otimes \eta_k)_\ast} & \op{Tor}^{\Z}_1(H^3(W,X^\vee),\F_2) \ar@^{(->}[d] \\
+   H^2(W,X^\vee)\otimes k^\times \ar@^{(->}[r] & H^2(W,X^\vee \otimes k^\times) \ar@{->>}[r] & \op{Tor}^{\Z}_1(H^3(W,X^\vee),k^\times) } \]}%
+}
+\pause[8] \begin{cor*}%
+   \begin{center}$(\op{id}\otimes \eta_k)_\ast([\phi_u]) = 0 \quad \Leftrightarrow\pause\quad \exists x\enskip [\phi_u] = \iota(x) \pause\wedge (\op{id}\otimes \eta_k)(x) = 0$\end{center}
+\end{cor*}
+\end{frame}
+
+\begin{frame}{Time to Compute}
+   \pause \dots or is it? \pause Recall\pause
+   \[ H^n(G,M) = H^n(\op{Hom}_{\Z[G]}(P_\bullet{},M)) \]
+   \pause where
+   \[ P_\bullet{}: \xymatrix{\dots \ar[r] & P_2 \ar[r]^{\partial_2} & P_1 \ar[r]^{\partial_1} & P_0 = \Z[G] } \]
+   is the standard (bar) resolution of $G$\pause , where
+   \[ P_n = \bigoplus_{[g_1,\dots,g_n] \in G^{\times n}} \Z[G]\cdot{}[g_1,\dots,g_n] \]
+   is the free $\Z[G]$-module over $G^{\times n}$. \pause Thus \uncover<9->{(for $M$ free)}
+   \[ \op{Hom}_G(P_\bullet{},M)_n = \op{Hom}_{\Z[G]}(P_n,M) \uncover<8->{\simeq \op{Hom}_{\op{Set}}(G^{\times n}, M)} \]
+   \pause[9] free $\Z$-module \pause of rank
+   \[ (\# G)^n \cdot{} \op{rk}_\Z(M) \]
+\end{frame}
+
+\begin{frame}{A Problem}
+   Weyl groups are \textit{big}. \pause For example
+   \begin{itemize}
+      \item<2->[$A_n$:] $W = S_{n+1}$ has order $(n+1)! \uncover<3->{\approx \sqrt{2\pi n}\left(\frac{n}{e}\right)^n}$
+      \item<4->[$E_8$:] $W$ has order $2^{14}\cdot{}3^5\cdot{}5^2\cdot 7 \uncover<5->{ \approx 10^9}$
+   \end{itemize}
+   \pause[6] \begin{problem*}To e.g. compute $H^2(W,X^\vee)$ for $\Phi$ of type $E_8$, need to compute kernel of
+   \[ 10^{27} \times 10^{18}\ \text{integer matrix} \]
+   \end{problem*}
+   \begin{itemize}
+      \item<7-> $n_0 = 2.686 \cdot 10^{25}$ (Loschmidt constant) particles in $1 m^3$ of ideal gas (at $0 \text{\textdegree\ C}$ and $1 \op{atm}$)
+      \item<8-> Default implementation in \texttt{Sage 8.2} can barely handle $100 \times 100$ matrices
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{A Solution}
+   \pause The \textbf{DeConcini-Salvetti resolution} $\mathcal{CS}_\bullet$ \pause of a finite Coxeter group $(W,S)$ is given by
+   \begin{align*}
+      \mathcal{CS}_n & = \bigoplus_{\Gamma \in \mathcal{F}_n} \Z[W]\cdot{} [\Gamma] \\
+      \uncover<4->{\mathcal{F}_n & = \{ \Gamma = (\Gamma_i)_{i \geq 1}\ :\ S\supseteq \Gamma_1 \supseteq \Gamma_2 \dots \text{ and $\# \Gamma = n$}\} \\}
+      \uncover<5->{\# \Gamma & := \sum_{i \geq 1} \# \Gamma_i}
+   \end{align*}
+   \pause[6]
+   \begin{itemize}
+      \item<6-> $\# \mathcal{F}_n = \binom{\# S + n - 1}{n}\uncover<7->{ = O((\# S)^k)}$
+      \item<8-> For $E_8$: $\mathcal{F}_2 = 36$, $\mathcal{F}_3 = 120$
+   \end{itemize}
+   \pause[9]\begin{NB*}To compute $H^2(W,X^\vee)$ for $E_8$ using $\mathcal{CS}_\bullet$, only need to compute kernel of
+      \[ 960\times 288 \text{ integer matrix}\]
+   \end{NB*}
+\end{frame}
+
+\begin{frame}{An Inner Conflict}
+\pause \begin{problem*}Can only compute a \textit{finite} number of cases, but there are \textit{infinite} families $A_\ell, B_\ell, C_\ell, D_\ell$ of irreducible root systems.\end{problem*}
+\pause So what's the point?
+\end{frame}
+
+\begin{frame}{An Observation}
+   \pause Consider
+   \[ d(\ell) := \op{dim}_{\F_2} H^2(W_\ell,Q^\vee_\ell) \]
+   \pause
+   {\setlength{\tabulinesep}{5pt}
+   \begin{longtabu}spread 10em{*8{X[-1,L,$$]}}
+      \toprule
+      \rowfont{\bf}
+      \bm{\ell} & A & B & C & D \\
+      \midrule
+      \endhead
+      1 & \uncover<14->{1} & \uncover<4->{\--} & \uncover<12->{\--} & \uncover<13->{\--} \\
+      2 & \uncover<14->{0} & \uncover<5->{3} & \uncover<12->{3} & \uncover<13->{\--} \\
+      3 & \uncover<14->{2} & \uncover<6->{5} & \uncover<12->{6} & \uncover<13->{2} \\
+      4 & \uncover<14->{0} & \uncover<7->{4} & \uncover<12->{7} & \uncover<13->{8} \\
+      5 & \uncover<14->{3} & \uncover<8->{7} & \uncover<12->{8} & \uncover<13->{4} \\
+      6 & \uncover<14->{0} & \uncover<9->{4} & \uncover<12->{8} & \uncover<13->{8} \\
+      7 & \uncover<14->{3} & \uncover<10->{7} & \uncover<12->{8} & \uncover<13->{4} \\
+      8 & \uncover<14->{0} & \uncover<11->{4} & \uncover<12->{8} & \uncover<13->{8}
+      \endline
+   \end{longtabu}}
+\end{frame}
+
+\begin{frame}{Coincidence?}
+\end{frame}
+
+\begin{frame}{Coincidence? No, Representation stability!}
+   \pause Note: $S_1 \subseteq S_2 \subseteq S_3 \subseteq S_4 \subseteq \dots$
+   \pause\begin{theorem*}[Nakaoka '60]
+      \begin{center}$\op{res}:H^k(S_{n+1},\F_p) \stackrel{\sim}{\longrightarrow} H^k(S_n,\F_p)\quad\text{ for $n \gg 0$}$\end{center}
+   \end{theorem*}
+   \pause \uncover<4->{\only<-5>{\eqmakebox[strikeBOX]{Generalization:}}\only<6->{\eqmakebox[strikeBOX]{\st{Generalization:}}}}
+   \begin{theorem*}[Nagpal-Snowden '18]
+      For every finitely generated $\mathbf{FI}$-module $M$ over $\F_p$
+      \begin{center}$\op{dim}_{\F_p} H^k(S_n,M_n) = \op{dim}_{\F_p} H^k(S_{n+q}, M_{n+q}) \quad\text{ for $n \gg 0$}$\end{center}
+      \pause for some $q = p^r$.
+   \end{theorem*}
+   
+\end{frame}
+
 \end{document}
