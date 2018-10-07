@@ -27,12 +27,16 @@
 \newcommand{\X}{\bbf{X}}
 
 \newtheorem{question}{Question}
+\newtheorem{proposition}{Proposition}
+\newtheorem{cor}{Corollary}
 \newtheorem*{theorem*}{Theorem}
 \newtheorem*{lemma*}{Lemma}
 \newtheorem*{cor*}{Corollary}
 \newtheorem*{def*}{Definition}
 \newtheorem*{NB*}{N.B}
 \newtheorem*{problem*}{Problem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{conjecture}{Conjecture}
 
 \title{The Cohomology of Root Data}
 \author{Nicolas A. Schmidt}
@@ -271,7 +275,7 @@
    \pause \dots or is it? \pause Recall\pause
    \[ H^n(G,M) = H^n(\op{Hom}_{\Z[G]}(P_\bullet{},M)) \]
    \pause where
-   \[ P_\bullet{}: \xymatrix{\dots \ar[r] & P_2 \ar[r]^{\partial_2} & P_1 \ar[r]^{\partial_1} & P_0 = \Z[G] } \]
+   \[ P_\bullet{}: \xymatrix{\dots \ar[r] & P_2 \ar[r]^{\partial_2} & P_1 \ar[r]^{\partial_1} & P_0 = \Z[G] \ar[r]^\varepsilon & \Z \ar[r] & 0 } \]
    is the standard (bar) resolution of $G$\pause , where
    \[ P_n = \bigoplus_{[g_1,\dots,g_n] \in G^{\times n}} \Z[G]\cdot{}[g_1,\dots,g_n] \]
    is the free $\Z[G]$-module over $G^{\times n}$. \pause Thus \uncover<9->{(for $M$ free)}
@@ -319,7 +323,7 @@
 
 \begin{frame}{An Observation}
    \pause Consider
-   \[ d(\ell) := \op{dim}_{\F_2} H^2(W_\ell,Q^\vee_\ell) \]
+   \[ d(\ell) := \op{dim}_{\F_2} H^2(W_\ell,Q^\vee_\ell\otimes \F_2) \]
    \pause
    {\setlength{\tabulinesep}{5pt}
    \begin{longtabu}spread 10em{*8{X[-1,L,$$]}}
@@ -354,7 +358,98 @@
       \begin{center}$\op{dim}_{\F_p} H^k(S_n,M_n) = \op{dim}_{\F_p} H^k(S_{n+q}, M_{n+q}) \quad\text{ for $n \gg 0$}$\end{center}
       for some $q = p^r$.
    \end{theorem*}
-   
 \end{frame}
 
+\begin{frame}{Another Problem}
+   \begin{itemize}
+      \item<1-> To decide question \ref{q:four}, need to know
+      \[ \iota: H^2(W,X^\vee)\otimes \F_2 \hookrightarrow H^2(W,X^\vee\otimes \F_2) \]
+      \pause[2] as well as $[\phi_u] \in H^2(W,X^\vee\otimes \F_2)$
+   \item<3-> The theorem of Nagpal-Snowden only gives isomorphism types
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{\dots The Plot Thickens}
+   Consider $H^2(W_\ell,Q^\vee_\ell\otimes \F_2)$ for the family $B_\ell$ again:\pause
+   {\setlength{\tabulinesep}{5pt}
+   \begin{longtabu}spread 10em{*3{X[-1,L,$$]}}
+      \toprule
+      \rowfont{\bf}
+      \bm{\ell} & d(\ell) & \uncover<3->{[\bm{\phi}_u]} \\
+      \midrule
+      \endhead
+      2 & 3 & \uncover<3->{(1,1,0)} \\
+      3 & 5 & \uncover<3->{(1,1,1,0,1)} \\
+      4 & 4 & \uncover<3->{(1,1,1,0)} \\
+      5 & 7 & \uncover<3->{(1,1,0,1,0,1,0)} \\
+      6 & 4 & \uncover<3->{(1,1,0,1)} \\
+      7 & 7 & \uncover<3->{(1,1,0,1,0,1,0)} \\
+      8 & 4 & \uncover<3->{(1,1,0,1)} \\
+      \endline
+   \end{longtabu}}
+\end{frame}
+
+\begin{frame}{\dots The Plot Thickens}
+   Let $A_\ell$ denote the matrix of
+   \[ \iota: H^2(W_\ell,Q^\vee_\ell) \otimes \F_2 \hookrightarrow H^2(W_\ell,Q^\vee_\ell\otimes \F_2) \]
+   w.r.t. the computed bases.
+   \pause \begin{center}
+      {\setlength{\tabulinesep}{3pt}\begin{tabu}spread 1cm {>{\bf}X[-1,R,$$]*7{X[-1,C,$$]}}
+         \toprule
+         \bm{\ell} & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+         \bm{d(\ell)} & 3 & 5 & 4 & 7 & 4 & 7 & 4 \\
+         \bm{A_\ell} & \uncover<3->{\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}} & \uncover<4->{\begin{pmatrix} 0 & 1 \\ 0 & 0 \\ 0 & 0 \\ 1 & 0 \\ 0 & 0 \end{pmatrix}} & \uncover<5->{\begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix}} & \uncover<6->{\begin{pmatrix} 0 & 1 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 1 & 0 \\ 0 & 0 \\ 0 & 0 \end{pmatrix}} & \uncover<7->{\begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix}} & \uncover<8->{\begin{pmatrix} 0 & 1 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 1 & 0 \\ 0 & 0 \\ 0 & 0 \end{pmatrix}} & \uncover<9->{\begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix}} \\
+         \bottomrule
+      \end{tabu}}
+   \end{center}
+\end{frame}
+
+\begin{frame}{\dots The Plot Thickens}
+   \begin{itemize}
+      \item<2-> For $X \in \{A,B,C,D\}$: canonically $W_\ell \subseteq W_{\ell+1}$ and $Q_\ell \subseteq Q_{\ell+1}$
+      \item<3-> Induces \textit{restriction}: $\op{res}: H^k(W_{\ell+1},Q^\vee_{\ell+1}) \rightarrow H^k(W_\ell,Q^\vee_\ell)$
+   \end{itemize}
+   \pause[4]
+   \begin{lemma*}
+   \begin{center}$\xymatrixcolsep{2pt}\xymatrix{ H^2(W_{\ell+1},Q^\vee_{\ell + 1})\otimes \F_2 \ar[d]^{\op{res}\otimes \op{id}} \ar@^{(->}[rrr]^\iota &&& H^2(W_{\ell + 1},Q^\vee_{\ell + 1}\otimes \F_2) \ar[d]^{\op{res}} & \ni [\phi_u] \ar@{|->}[d] \\
+         H^2(W_\ell, Q^\vee_\ell) \otimes \F_2 \ar@{^(->}[rrr]^\iota &&& H^2(W_\ell, Q^\vee_\ell \otimes \F_2) & \ni [\phi_u]}$\end{center}
+   \end{lemma*}
+\end{frame}
+
+\begin{frame}{A Conjecture}
+   \begin{conjecture}
+      For $\ell \gg 0$, restriction induces isomorphisms
+      \begin{align*} \uncover<2->{H^2(W_{\ell+q},Q^\vee_{\ell + q}\otimes \F_2) & \stackrel{\sim}{\longrightarrow} H^2(W_\ell,Q^\vee_\ell \otimes \F_2) \\[.8em]}
+         \uncover<3->{H^2(W_{\ell + q},Q^\vee_{\ell+q}) & \stackrel{\sim}{\longrightarrow} H^2(W_\ell,Q^\vee_\ell)}
+      \end{align*}
+      \pause[4] where $q = 2$ for types $A,B,D$ \pause and $q = 1$ for type $C$.
+   \end{conjecture}
+\end{frame}
+
+\begin{frame}{A result}
+   \begin{proposition*}[S.]The sequence
+      \begin{center}$Q^\vee_1 \subseteq Q^\vee_2 \subseteq Q^\vee_3 \subseteq \dots$\end{center}
+      forms an $\mathbf{FI}_X$-module $Q^\vee$. \pause For type $A$, it is \textit{finitely presented} \pause with generators in degrees $\leq 2$ \pause and relations in degrees $\leq 2$.
+   \end{proposition*}
+   \pause (Effective version of Nagpal-Snowden + Computations) $\Rightarrow$
+   \begin{theorem*}[S.]
+      For $k = 1,2,3$ and $\ell$ even, the group
+      \begin{center}$H^k(S_{\ell+1},Q^\vee_\ell)$\end{center}
+      is $2$-torsion free.
+   \end{theorem*}
+\end{frame}
+
+\begin{frame}{}
+   \begin{center}\Huge \textbf{Thanks!}\end{center}
+\end{frame}
+
+\begin{frame}{References}
+   \begin{itemize}
+      \item Tits, ``\textit{Normalisateurs de tores I.}'', J. Algebra (1966)
+      \item Adams, He, ``\textit{Lifting elements of Weyl groups}'', J. Algebra (2017)
+      \item Nagpal, Snowden, ``\textit{Periodicity in the cohomology of symmetric groups via divided powers}'', Proc. Lond. Math. Soc (2018)
+      \item Wilson, ``\textit{$\mathbf{FI}_{\mathcal{W}}$-modules and stability criteria for representations of classical Weyl groups}'', Journal of Algebra (2014)
+      \item \texttt{https://github.com/mr-infty/crd}
+   \end{itemize}
+\end{frame}
 \end{document}
