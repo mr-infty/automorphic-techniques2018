@@ -304,7 +304,7 @@
    \end{align*}
    \pause[6]
    \begin{itemize}
-      \item<6-> $\# \mathcal{F}_n = \binom{\# S + n - 1}{n}\uncover<7->{ = O((\# S)^k)}$
+      \item<6-> $\# \mathcal{F}_n = \binom{\# S + n - 1}{n}\uncover<7->{ = O((\# S)^n)}$
       \item<8-> For $E_8$: $\mathcal{F}_2 = 36$, $\mathcal{F}_3 = 120$
    \end{itemize}
    \pause[9]\begin{NB*}To compute $H^2(W,X^\vee)$ for $E_8$ using $\mathcal{CS}_\bullet$, only need to compute kernel of
@@ -348,11 +348,11 @@
    \pause\begin{theorem*}[Nakaoka '60]
       \begin{center}$\op{res}:H^k(S_{n+1},\F_p) \stackrel{\sim}{\longrightarrow} H^k(S_n,\F_p)\quad\text{ for $n \gg 0$}$\end{center}
    \end{theorem*}
-   \pause \uncover<4->{\only<-5>{\eqmakebox[strikeBOX]{Generalization:}}\only<6->{\eqmakebox[strikeBOX]{\st{Generalization:}}}}
+   \pause \uncover<4->{\only<-4>{\eqmakebox[strikeBOX]{Generalization:}}\only<5->{\eqmakebox[strikeBOX]{\st{Generalization:}}}}
    \begin{theorem*}[Nagpal-Snowden '18]
       For every finitely generated $\mathbf{FI}$-module $M$ over $\F_p$
       \begin{center}$\op{dim}_{\F_p} H^k(S_n,M_n) = \op{dim}_{\F_p} H^k(S_{n+q}, M_{n+q}) \quad\text{ for $n \gg 0$}$\end{center}
-      \pause for some $q = p^r$.
+      for some $q = p^r$.
    \end{theorem*}
    
 \end{frame}
